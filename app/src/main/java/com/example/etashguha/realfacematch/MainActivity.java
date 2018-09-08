@@ -12,7 +12,7 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
 
     Button btnpic;
-    ImageView imgTakenPic;
+    ImageView imgTakenPic, imgToMimic;
     private static final int CAM_REQUEST=1313;
     Bitmap pictureTaken;
 
@@ -24,7 +24,16 @@ public class MainActivity extends AppCompatActivity {
 
         btnpic = (Button) findViewById(R.id.button);
         imgTakenPic = (ImageView)findViewById(R.id.imageView);
+        imgToMimic = findViewById(R.id.imageToMimic);
         btnpic.setOnClickListener(new btnTakePhotoClicker());
+        double x = Math.random() * 3;
+        if(x > 2){
+            imgToMimic.setImageResource(R.drawable.frownetash);
+        } else if(x < 1){
+            imgToMimic.setImageResource(R.drawable.smileakum);
+        } else {
+            imgToMimic.setImageResource(R.drawable.smileetash);
+        }
     }
 
     @Override
