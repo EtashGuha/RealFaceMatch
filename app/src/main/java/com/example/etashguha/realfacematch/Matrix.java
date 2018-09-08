@@ -100,3 +100,4 @@ public class Matrix {
                 y[j] += a[i][j] * x[i];
         return y;
     }
+}

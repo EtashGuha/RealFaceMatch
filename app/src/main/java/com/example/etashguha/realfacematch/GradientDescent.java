@@ -25,7 +25,8 @@ public class GradientDescent {
                     for(int k = 0; k < Theta.length; k++){
                         h += Theta[k] * X[j][k];
                     }
-                    Theta[i] -= alphaRate * (h - y[j]) * X[j][i];
+                    Theta[i] -= alphaRate * (h/40000 - y[j]/100) * X[j][i];
+                    System.out.println("calculating");
                 }
             }
             count++;

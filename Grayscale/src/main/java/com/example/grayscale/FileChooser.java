@@ -110,7 +110,7 @@ public class FileChooser
             // get the URL for where we loaded this class
             Class currClass = Class.forName("FileChooser");
             URL classURL = currClass.getResource("FileChooser.class");
-            URL fileURL = new URL(" /Users/VineethHarish 1/RealFaceMatch/app/src/main/res/drawable");
+            URL fileURL = new URL("drawable/");
             directory = fileURL.getPath();
             directory = URLDecoder.decode(directory, "UTF-8");
             dirFile = new File(directory);

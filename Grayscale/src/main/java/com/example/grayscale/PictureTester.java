@@ -25,7 +25,7 @@ public class PictureTester
     /** Method to test zeroBlue */
     public static void testZeroBlue()
     {
-        Picture beach = new Picture("beach.jpg");
+        Picture beach = new Picture("frown1.jpg");
         beach.explore();
         beach.zeroBlue();
         beach.explore();
@@ -65,8 +65,8 @@ public class PictureTester
         swan.explore();
     }
 
-    public void testGrayscale(){
-        Picture beach = new Picture("beach.jpg");
+    public static void testGrayscale(){
+        Picture beach = new Picture("frown1.jpg");
         beach.grayScale();
         beach.explore();
 
