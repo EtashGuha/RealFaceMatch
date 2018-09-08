@@ -1,10 +1,16 @@
 package com.example.grayscale;
 
+import javax.imageio.stream.*;
+import javax.imageio.ImageReader;
+import java.io.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+
+
+
 /**
  * This class contains class (static) methods
  * that will help you test the Picture class
@@ -15,6 +21,7 @@ import javax.imageio.ImageIO;
  */
 public class PictureTester
 {
+
     /** Method to test zeroBlue */
     public static void testZeroBlue()
     {
@@ -58,7 +65,7 @@ public class PictureTester
         swan.explore();
     }
 
-    public static void testGrayscale(){
+    public void testGrayscale(){
         Picture beach = new Picture("beach.jpg");
         beach.grayScale();
         beach.explore();
@@ -84,6 +91,14 @@ public class PictureTester
 
         return result;
     }
+    public static BufferedImage bitmapToImage(byte [] data, String format) throws IOException {
+        ByteArrayInputStream inb = new ByteArrayInputStream(data);
+        ImageReader rdr = (ImageReader) ImageIO.getImageReadersByFormatName(format).next();
+        ImageInputStream imageInput = ImageIO.createImageInputStream(inb);
+        rdr.setInput(imageInput);
+        return rdr.read(0);
+    }
+
 
     /** Main method for testing.  Every class can have a main
      * method in Java */
