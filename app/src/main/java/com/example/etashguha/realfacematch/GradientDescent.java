@@ -17,14 +17,19 @@ public class GradientDescent {
     }
 
     public double [] train() {
-        int i = 0
-        while (i < numIterations) {
+        int count = 0;
+        while (count < numIterations) {
             for (int i = 0; i < Theta.length; i++) {
                 for (int j = 0; j < y.length; j++) {
-                    Theta[i] -= alphaRate
+                    double h = 0;
+                    for(int k = 0; k < Theta.length; k++){
+                        h += Theta[k] * X[j][k];
+                    }
+                    Theta[i] -= alphaRate * (h - y[j]) * X[j][i];
                 }
             }
-            i++;
+            count++;
         }
+        return Theta;
     }
 }
