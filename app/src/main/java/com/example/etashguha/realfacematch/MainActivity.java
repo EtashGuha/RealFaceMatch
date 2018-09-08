@@ -16,10 +16,11 @@ import id.zelory.compressor.Compressor;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnpic;
+    Button btnpic, switcher;
     ImageView imgTakenPic, imgToMimic;
     private static final int CAM_REQUEST=1313;
     Bitmap pictureTaken;
+    boolean isPictureSmiling;
 
 
     @Override
@@ -31,25 +32,28 @@ public class MainActivity extends AppCompatActivity {
         imgTakenPic = (ImageView)findViewById(R.id.imageView);
         imgToMimic = findViewById(R.id.imageToMimic);
         btnpic.setOnClickListener(new btnTakePhotoClicker());
-        double x = Math.random() * 3;
-        imgToMimic.setImageResource(R.drawable.frownetash);
-        Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.frownetash);
-
+        imgToMimic.setImageResource(R.drawable.realsmiling);
+        isPictureSmiling = true;
+        Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.realsmiling);
         imgToMimic.setImageBitmap(bMap);
-        /*if(x > 2){
-            imgToMimic.setImageResource(R.drawable.frownetash);
-            Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.frownetash);
-            imgToMimic.setImageBitmap(bMap);
-        } else if(x < 1){
-            imgToMimic.setImageResource(R.drawable.smileakum);
-            Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.smileakum);
-            imgToMimic.setImageBitmap(bMap);
+        switcher = (Button)findViewById(R.id.switcheroo);
 
-        } else {
-            imgToMimic.setImageResource(R.drawable.smileetash);
-            Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.smileetash);
-            imgToMimic.setImageBitmap(bMap);
-        }*/
+        switcher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isPictureSmiling == true){
+                    imgToMimic.setImageResource(R.drawable.realfrowning);
+                    isPictureSmiling = false;
+                    Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.realfrowning);
+                    imgToMimic.setImageBitmap(bMap);
+                } else {
+                    imgToMimic.setImageResource(R.drawable.realsmiling);
+                    isPictureSmiling = true;
+                    Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.realsmiling);
+                    imgToMimic.setImageBitmap(bMap);
+                }
+            }
+        });
     }
 
     @Override
@@ -70,5 +74,6 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent,CAM_REQUEST);
         }
     }
+
 }
 
