@@ -6,7 +6,7 @@ public class GradientDescent {
     int numIterations;
     double alphaRate;
     public GradientDescent(double [] y, double [][] X, double alphaRate, int numIterations){
-        this.Theta =new double [X[0].length + 1];
+        this.Theta =new double [X[0].length];
         for(int i = 0; i < Theta.length; i++){
             Theta[i] = Math.random();
         }
@@ -25,7 +25,7 @@ public class GradientDescent {
                     for(int k = 0; k < Theta.length; k++){
                         h += Theta[k] * X[j][k];
                     }
-                    Theta[i] -= alphaRate * (h/40000 - y[j]/100) * X[j][i];
+                    Theta[i] -= alphaRate * (h/226- y[j]/100) * X[j][i];
                     System.out.println("calculating");
                 }
             }
