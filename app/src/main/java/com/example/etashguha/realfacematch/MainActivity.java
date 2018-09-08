@@ -7,18 +7,24 @@ import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.graphics.BitmapFactory;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import java.io.File;
+
+import id.zelory.compressor.Compressor;
+
 public class MainActivity extends AppCompatActivity {
 
-    Button btnpic;
-    ImageView imgTakenPic;
+    Button btnpic, switcher;
+    ImageView imgTakenPic, imgToMimic;
     private static final int CAM_REQUEST=1313;
     Bitmap pictureTaken;
+    boolean isPictureSmiling;
 
 
     @Override
@@ -28,7 +34,30 @@ public class MainActivity extends AppCompatActivity {
 
         btnpic = (Button) findViewById(R.id.button);
         imgTakenPic = (ImageView)findViewById(R.id.imageView);
+        imgToMimic = findViewById(R.id.imageToMimic);
         btnpic.setOnClickListener(new btnTakePhotoClicker());
+        imgToMimic.setImageResource(R.drawable.realsmiling);
+        isPictureSmiling = true;
+        Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.realsmiling);
+        imgToMimic.setImageBitmap(bMap);
+        switcher = (Button)findViewById(R.id.switcheroo);
+
+        switcher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isPictureSmiling == true){
+                    imgToMimic.setImageResource(R.drawable.realfrowning);
+                    isPictureSmiling = false;
+                    Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.realfrowning);
+                    imgToMimic.setImageBitmap(bMap);
+                } else {
+                    imgToMimic.setImageResource(R.drawable.realsmiling);
+                    isPictureSmiling = true;
+                    Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.realsmiling);
+                    imgToMimic.setImageBitmap(bMap);
+                }
+            }
+        });
     }
 
     @Override
@@ -117,5 +146,6 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent,CAM_REQUEST);
         }
     }
+
 }
 
