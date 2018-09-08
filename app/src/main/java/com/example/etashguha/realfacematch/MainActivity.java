@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         imgToMimic.setImageResource(R.drawable.realsmiling);
         isPictureSmiling = true;
         bMap = BitmapFactory.decodeResource(getResources(), R.drawable.realsmiling);
-        bMap.createScaledBitmap(bMap, bitMapd, bitMapd,false);
+        bMap = Bitmap.createScaledBitmap(bMap, bitMapd, bitMapd,false);
         imgToMimic.setImageBitmap(bMap);
         switcher = (Button) findViewById(R.id.switcheroo);
         score = findViewById(R.id.textView3);
@@ -60,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
                     imgToMimic.setImageResource(R.drawable.realfrowning);
                     isPictureSmiling = false;
                     bMap = BitmapFactory.decodeResource(getResources(), R.drawable.realfrowning);
-                    bMap.createScaledBitmap(bMap, bitMapd, bitMapd,false);
+                    bMap = Bitmap.createScaledBitmap(bMap, bitMapd, bitMapd,false);
                     imgToMimic.setImageBitmap(bMap);
                 } else {
                     imgToMimic.setImageResource(R.drawable.realsmiling);
                     isPictureSmiling = true;
                     bMap = BitmapFactory.decodeResource(getResources(), R.drawable.realsmiling);
-                    bMap.createScaledBitmap(bMap, bitMapd, bitMapd,false);
+                    bMap = Bitmap.createScaledBitmap(bMap, bitMapd, bitMapd,false);
                     imgToMimic.setImageBitmap(bMap);
                 }
             }
@@ -91,18 +91,23 @@ public class MainActivity extends AppCompatActivity {
         }
         for (int i = 1; i < bMapdSquared; i++) {
             X[4][i] = drawableJpgToBitmap(R.drawable.smile9, R.drawable.smile10)[i-1];
+            System.out.println(X[4][i]);
         }
         for (int i = 1; i < bMapdSquared; i++) {
             X[5][i] = drawableJpgToBitmap(R.drawable.smile1, R.drawable.frown1)[i-1];
+            System.out.println(X[5][i]);
         }
         for (int i = 1; i < bMapdSquared; i++) {
             X[6][i] = drawableJpgToBitmap(R.drawable.smile2, R.drawable.frown2)[i-1];
+            System.out.println(X[6][i]);
         }
         for (int i = 1; i < bMapdSquared; i++) {
             X[7][i] = drawableJpgToBitmap(R.drawable.smile3, R.drawable.frown3)[i-1];
+            System.out.println(X[7][i]);
         }
         for (int i = 1; i < bMapdSquared; i++) {
             X[8][i] = drawableJpgToBitmap(R.drawable.smile4, R.drawable.frown4)[i-1];
+            System.out.println(X[8][i]);
         }
         for (int i = 1; i < bMapdSquared; i++) {
             X[9][i] = drawableJpgToBitmap(R.drawable.frown9, R.drawable.frown10)[i-1];
@@ -150,7 +155,8 @@ public class MainActivity extends AppCompatActivity {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 pictureTaken = bitmap;
             }
-            pictureTaken.createScaledBitmap(pictureTaken, bitMapd, bitMapd, false);
+            pictureTaken = Bitmap.createScaledBitmap(pictureTaken, bitMapd, bitMapd, false);
+            System.out.print(pictureTaken.getWidth());
             double [] lastbMap = convertTo1DArray(pictureTaken, pictureTaken.getWidth(), pictureTaken.getHeight());
             double [] bMapdouble = convertTo1DArray(bMap, bMap.getWidth(), bMap.getHeight());
             double[] bMapdiff = difference(bMapdouble, lastbMap);
@@ -158,8 +164,10 @@ public class MainActivity extends AppCompatActivity {
             for(int i = 1; i < theta.length; i++){
                 prediction+= theta[i] * bMapdiff[i-1];
             }
+            System.out.println("Theta: " + theta[3]);
             prediction += theta[0];
             prediction *= 100;
+            prediction /= 90000;
             score.setText("Score: " + prediction);
 
 
@@ -168,8 +176,8 @@ public class MainActivity extends AppCompatActivity {
         public double[] drawableJpgToBitmap ( int x, int y){
             Bitmap bMap1 = BitmapFactory.decodeResource(getResources(), x);
             Bitmap bMap2 = BitmapFactory.decodeResource(getResources(), y);
-            bMap1.createScaledBitmap(bMap1, bitMapd, bitMapd, false);
-            bMap2.createScaledBitmap(bMap2, bitMapd, bitMapd, false);
+            bMap1 = Bitmap.createScaledBitmap(bMap1, bitMapd, bitMapd, false);
+            bMap2 = Bitmap.createScaledBitmap(bMap2, bitMapd, bitMapd, false);
             double[] bMap1double = convertTo1DArray(bMap1, bMap1.getWidth(), bMap1.getHeight());
             double[] bMap2double = convertTo1DArray(bMap2, bMap2.getWidth(), bMap2.getHeight());
             double[] bMapdiff = difference(bMap1double, bMap2double);

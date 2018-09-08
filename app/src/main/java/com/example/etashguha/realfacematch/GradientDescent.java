@@ -20,13 +20,20 @@ public class GradientDescent {
         int count = 0;
         while (count < numIterations) {
             for (int i = 0; i < Theta.length; i++) {
+                if (i == 16) {
+                    System.out.print("");
+                }
                 for (int j = 0; j < y.length; j++) {
                     double h = 0;
                     for(int k = 0; k < Theta.length; k++){
                         h += Theta[k] * X[j][k];
                     }
-                    Theta[i] -= alphaRate * (h/226- y[j]/100) * X[j][i];
-                    System.out.println("calculating");
+                    Theta[i] -= alphaRate * (h/(1000 * 226)- y[j]/100) * X[j][i]/(256^2);
+                    if(Double.isNaN(Theta[i])){
+                        System.out.println("test");
+
+                    }
+
                 }
             }
             count++;
